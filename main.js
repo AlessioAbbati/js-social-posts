@@ -56,6 +56,9 @@ const posts = [
     }
 ];
 
+// array vuoto dove mettere i post a cui ho messo like
+likedPosts = [];
+
 const elePost = document.querySelector('.posts-list');
 
 
@@ -99,11 +102,9 @@ const eleCounters = document.querySelectorAll(".js-likes-counter")
 
 for (let i = 0; i < eleLikeButtons.length; i++) {
     const eleLike = eleLikeButtons[i];
-
+    
     eleLike.addEventListener("click", function () {
-
-
-
+        
         const eleCounter = eleCounters[i];
 
         /** il pulsate è stato già cliccato **/
@@ -116,6 +117,8 @@ for (let i = 0; i < eleLikeButtons.length; i++) {
 
         else {
             posts[i].likes += 1
+            likedPosts.push(elePost);
+            console.log(likedPosts);
         }
 
         eleLike.classList.toggle('like-button--liked');
