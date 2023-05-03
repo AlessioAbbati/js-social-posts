@@ -111,14 +111,15 @@ for (let i = 0; i < eleLikeButtons.length; i++) {
         /** il pulsate è stato già cliccato **/
 
         if (eleLike.classList.contains('like-button--liked')) {
-
             posts[i].likes -= 1
+            likedPosts.pop(`${posts[i].id}`);
+            console.log(likedPosts);
         }
 
 
         else {
             posts[i].likes += 1
-            likedPosts.push(elePost);
+            likedPosts.push(`${posts[i].id}`);
             console.log(likedPosts);
         }
 
