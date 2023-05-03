@@ -38,7 +38,7 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
             "name": "Luca Formicola",
-            "image": "https://unsplash.it/300/300?image=20"
+            "image": null
         },
         "likes": 56,
         "created": "2021-04-03"
@@ -63,16 +63,17 @@ const elePost = document.querySelector('.posts-list');
 
 
 for (let i = 0; i < posts.length; i++) {
-
+    const dateReverse = reverseDate(posts[i].created);
+    const nullImage = getInitials(posts[i].author.name);
     elePost.innerHTML += `<div class="post">
 <div class="post__header">
     <div class="post-meta">                    
         <div class="post-meta__icon">
-            <img class="profile-pic" src="${posts[i].author.image}" alt="Phil Mangione">                    
+            <img class="profile-pic" src="${posts[i].author.image || 'https://via.placeholder.com/150x150.png?text=' + nullImage}" alt="">                    
         </div> 
          <div class="post-meta__data">
             <div class="post-meta__author">${posts[i].author.name}</div>
-            <div class="post-meta__time">${posts[i].created}</div>
+            <div class="post-meta__time">${dateReverse}</div>
         </div>                    
     </div>
 </div>
@@ -102,9 +103,9 @@ const eleCounters = document.querySelectorAll(".js-likes-counter")
 
 for (let i = 0; i < eleLikeButtons.length; i++) {
     const eleLike = eleLikeButtons[i];
-    
+
     eleLike.addEventListener("click", function () {
-        
+
         const eleCounter = eleCounters[i];
 
         /** il pulsate è stato già cliccato **/
@@ -125,4 +126,17 @@ for (let i = 0; i < eleLikeButtons.length; i++) {
         eleCounter.innerHTML = `${posts[i].likes}`
 
     });
+}
+
+// creo la funzione per invertire la data
+
+function reverseDate(date) {
+    const partDate = date.split('-');
+    return `${partDate[2]}-${partDate[1]}-${partDate[0]}`;
+}
+
+// creo la funzione per inserire le iniziali nell'immagine di profilo
+
+function getInitials(name) {
+    return name.split(' ').map(word => word.charAt(0)).join('').toUpperCase();
 }
